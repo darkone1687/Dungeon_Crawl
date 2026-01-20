@@ -67,8 +67,8 @@ class Player:
         self.floor = 1
         self.exp = 0
         self.exp_to_next = 25
-        self.max_stamina = 25
-        self.stamina = 25
+        self.max_stamina = 30
+        self.stamina = 30
         self.swords = 0
         self.armor = 0
         self.shields = 0
@@ -131,15 +131,18 @@ class Player:
 
     def magic(self):
             current = self.stamina
-            
-            if (current + 2) > self.max_stamina:
-                self.stamina = self.max_stamina
-                self.mp -= 10
-                print(f"Player used 10MP to raise stamina to: {self.stamina}")
+            if self.mp - 10 >= 0:
+                if (current + 2) > self.max_stamina:
+                    self.stamina = self.max_stamina
+                    self.mp -= 10
+                    print(f"Player used 10MP to raise stamina to: {self.stamina}")
+                else:
+                    self.stamina += 2
+                    self.mp -= 10
+                    print(f"Player used 10MP to raise stamina to: {self.stamina}")
             else:
-                self.stamina += 2
-                self.mp -= 10
-                print(f"Player used 10MP to raise stamina to: {self.stamina}")
+                print(f"Player does not have 10MP to use. MP left: {self.mp}")
+                
             print(f"\n📍 Floor {self.floor} | HP {self.hp}/{self.max_hp} | MP: {self.mp}/{self.max_mp} | Stamina: {self.stamina}/{self.max_stamina}")
     
 
